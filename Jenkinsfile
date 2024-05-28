@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+     tools {
+        maven 'Maven 3.8.1'
+    }
+
     parameters {
          string(name: 'tomcat_dev', defaultValue: '35.166.210.154', description: 'Staging Server')
          string(name: 'tomcat_prod', defaultValue: '34.209.233.6', description: 'Production Server')
@@ -13,7 +17,9 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                sh 'mvn clean package'
+                withMaven(maven: 'Maven 3.8.1') {
+                    sh 'mvn clean package'
+                }
             }
             post {
                 success {
