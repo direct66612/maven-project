@@ -2,7 +2,7 @@ pipeline {
     agent any
 
      tools {
-        maven 'Maven 3.8.1'
+        maven 'localMaven'
     }
 
     parameters {
@@ -17,7 +17,7 @@ pipeline {
 stages{
         stage('Build'){
             steps {
-                withMaven(maven: 'Maven 3.8.1') {
+                withMaven(maven: 'localMaven') {
                     sh 'mvn clean package'
                 }
             }
