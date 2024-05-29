@@ -31,15 +31,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/debian/Downloads/tomcat-demo.pem /var/lib/jenkins/workspace/FullyAutomated/webapp/target
- ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                sh "scp -i /home/debian/Downloads/tomcat-demo.pem /var/lib/jenkins/workspace/FullyAutomated/webapp/target/webapp.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp -i /home/debian/Downloads/tomcat-demo.pem /var/lib/jenkins/workspace/FullyAutomated/webapp/target
- ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+            sh "scp -i /home/debian/Downloads/tomcat-demo.pem /var/lib/jenkins/workspace/FullyAutomated/webapp/target/webapp.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                     }
                 }
             }
